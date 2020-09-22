@@ -12,7 +12,7 @@ This is the repository of a student taking STATS 506. The course website and cou
 
 I worked with the following group members on these activities.
 
-- []()
+- [Lehao25](https://github.com/Lehao25/Stats506_public)
 
 The details of these activities for the weeks are as follows
 
