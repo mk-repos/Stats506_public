@@ -14,7 +14,7 @@ I worked with the following group members on these activities.
 
 - [Lehao25](https://github.com/Lehao25/Stats506_public)
 
-The details of these activities for the weeks are as follows
+The activities for each week are as follows:
 
 - Week 1
 	- We created a shell script to retrieve the columns of the .csv file.
