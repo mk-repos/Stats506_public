@@ -22,3 +22,10 @@ The activities for each week are as follows:
 	- We solved problems regarding the output of the R script.
 - Week 3
 	- We used Git & GitHub to create this public repository and learned to manipulate the branches.
+
+### Weeks 4
+
+I worked with the following group members on these activities.
+
+ - [yanhan-si](https://github.com/yanhan-si/Stats506_public)
+ - [kylewschulz](https://github.com/kylewschulz/Stats506_public)
