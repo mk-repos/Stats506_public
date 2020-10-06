@@ -23,9 +23,15 @@ The activities for each week are as follows:
 - Week 3
 	- We used Git & GitHub to create this public repository and learned to manipulate the branches.
 
-### Weeks 4
+### Weeks 4-5
 
 I worked with the following group members on these activities.
 
  - [yanhan-si](https://github.com/yanhan-si/Stats506_public)
  - [kylewschulz](https://github.com/kylewschulz/Stats506_public)
+
+- Week 4
+	- We solved problems regarding `tidyverse`,  `dplyr`, and `ggplot2` packages.
+- Week 5
+	- We solved unfinished problems about `ggplot2` from the previous week.
+	- We conducted a peer review of the GitHub repository/.
