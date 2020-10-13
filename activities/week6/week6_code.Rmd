@@ -10,7 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-# 1 Read data
+# Part 1
+
+## 1 Read data
 
 ```{r}
 path = "./data"
@@ -20,14 +22,14 @@ demo = read_delim(nhanes_demo, delim = ',')
 ohxden = read_delim(nhanes_ohxden, delim = ',')
 ```
 
-# 2 Joining data files
+## 2 Joining data files
 
 ```{r}
 nhanes_join = select(ohxden, SEQN, OHDDESTS) %>% 
   left_join(demo, by = 'SEQN')
 ```
 
-# 3 Cleaning data
+## 3 Cleaning data
 
 ```{r}
 summary(nhanes_join)
@@ -39,7 +41,7 @@ nhanes_join = nhanes_join %>%
             gender = if_else(RIAGENDR == 1,'Male', 'Female'),
             age = RIDAGEYR,
             under_20 = if_else(age < 20, 1, 0),
-            college = if_else(DMDEDUC2 == 4 & DMDEDUC2 == 5,
+            college = if_else(DMDEDUC2 == 4 | DMDEDUC2 == 5,
                              'some college/college graduate',
                              'No college/<20', missing = 'No college/<20'),
             exam_status = RIDSTATR,
@@ -47,7 +49,7 @@ nhanes_join = nhanes_join %>%
 nhanes_join
 ```
 
-# 4 & 5 Create a variable indicating ohx status 
+## 4 & 5 Create a variable indicating ohx status 
 
 ```{r}
 nhanes_join = nhanes_join %>% 
@@ -58,3 +60,27 @@ nhanes_join = nhanes_join %>%
 nhanes_join
 ```
 
+# Part 2
+
+## 1
+
+```{r}
+nhanes_join %>% 
+  group_by(under_20, ohx) %>%
+  summarise(count = n(), .groups = 'drop_last') %>% 
+  mutate(prop = count / sum(count))
+```
+
+```{r}
+nhanes_join %>% 
+  group_by(gender, ohx) %>% 
+  summarise(count = n(), .groups = 'drop_last') %>% 
+  mutate(prop = count / sum(count))
+```
+
+```{r}
+nhanes_join %>% 
+  group_by(college, ohx) %>% 
+  summarise(count = n(), .groups = 'drop_last') %>% 
+  mutate(prop = count / sum(count))
+```
