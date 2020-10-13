@@ -51,7 +51,10 @@ nhanes_join
 
 ```{r}
 nhanes_join = nhanes_join %>% 
-  mutate(ohx = ifelse(exam_status == 2 & ohx_status == 1, 'complete', 'missing')) %>% 
+  mutate(ohx = if_else(exam_status == 2 & ohx_status == 1,
+                      'complete',
+                      'missing')) %>% 
   filter(exam_status == 2)
+nhanes_join
 ```
 
