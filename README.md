@@ -34,4 +34,6 @@ I worked with the following group members on these activities.
 	- We solved problems regarding `tidyverse`,  `dplyr`, and `ggplot2` packages.
 - Week 5
 	- We solved unfinished problems about `ggplot2` from the previous week.
-	- We conducted a peer review of the GitHub repository/.
+	- We conducted a peer review of the GitHub repository.
+- Week 6
+	- We constructed a balance table comparing demographics in the NHANES data
