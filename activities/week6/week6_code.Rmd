@@ -25,9 +25,15 @@ ohxden = read_delim(nhanes_ohxden, delim = ',')
 ## 2 Joining data files
 
 ```{r}
+# 大きい方のデータにジョインしないとデータ失われる、ここは逆にせよ
 nhanes_join = select(ohxden, SEQN, OHDDESTS) %>% 
   left_join(demo, by = 'SEQN')
 ```
+
+```{r}
+nhanes_join
+```
+
 
 ## 3 Cleaning data
 
@@ -45,7 +51,8 @@ nhanes_join = nhanes_join %>%
                              'some college/college graduate',
                              'No college/<20', missing = 'No college/<20'),
             exam_status = RIDSTATR,
-            ohx_status = OHDDESTS)
+            ohx_status = OHDDESTS) %>% 
+  filter(exam_status == 2)
 nhanes_join
 ```
 
@@ -55,8 +62,7 @@ nhanes_join
 nhanes_join = nhanes_join %>% 
   mutate(ohx = if_else(exam_status == 2 & ohx_status == 1,
                       'complete',
-                      'missing')) %>% 
-  filter(exam_status == 2)
+                      'missing'))
 nhanes_join
 ```
 
