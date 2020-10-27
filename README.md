@@ -37,3 +37,14 @@ I worked with the following group members on these activities.
 	- We conducted a peer review of the GitHub repository.
 - Week 6
 	- We constructed a balance table comparing demographics in the NHANES data
+
+## Group Project 1
+
+The scripts for the first group project is stored in the following group repository.
+
+ - [Stats506_group4](https://github.com/mk-repos/Stats506_group4)
+
+I worked with the following group members on this project.
+
+ - [zhaodyleo](https://github.com/zhaodyleo/STATS506_F20)
+ - [Lehao25](https://github.com/Lehao25/Stats506_public)
