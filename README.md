@@ -23,7 +23,7 @@ The activities for each week are as follows:
 - Week 3
 	- We used Git & GitHub to create this public repository and learned to manipulate the branches.
 
-### Weeks 4-5
+### Weeks 4-6
 
 I worked with the following group members on these activities.
 
