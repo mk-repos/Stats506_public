@@ -12,9 +12,9 @@ This kind of analysis is not possible in countries with universal health care sy
 
 In the NHANES questionnaire survey, we will use the following:
 
- - Health Insurance (HIQ_J)
+ - Health Insurance (HIQ)
 	 - This questionnaire allows us to obtain the type of insurance that subjects enroll in.
- - Hospital Utilization & Access to Care (HUQ_J)
+ - Hospital Utilization & Access to Care (HUQ)
 	 - "*Number of times the subject receive healthcare over past year* (HUQ051)"
 
 We will link the type of insurance **at the time of the survey** to the frequency of use **during the previous year**. Because the subjects may not have used their current insurance during the previous year, the following data/variable may be used to clean up the data as much as possible.
