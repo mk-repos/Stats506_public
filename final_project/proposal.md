@@ -15,18 +15,18 @@ In the NHANES questionnaire survey, we will use the following:
  - Health Insurance (HIQ_J)
 	 - This questionnaire allows us to obtain the type of insurance that subjects enroll in.
  - Hospital Utilization & Access to Care (HUQ_J)
-	 - "Number of times the subject receive healthcare over past year (HUQ051)"
+	 - "*Number of times the subject receive healthcare over past year* (HUQ051)"
 
 We will link the type of insurance **at the time of the survey** to the frequency of use **during the previous year**. Because the subjects may not have used their current insurance during the previous year, the following data/variable may be used to clean up the data as much as possible.
 
  - Insurance Questionnaire (HIQ_J) of the previous wave.
- - "Time when no insurance in past year? (HIQ210)"
+ - "*Time when no insurance in past year?* (HIQ210)"
 
 # Analysis
 
 We first calculate point estimates and confidence intervals of the frequency of hospital utilization by insurance type.
 
-However, this doesn't take into account the fact that pregnant women and the elderly are more likely to use medical services in their nature, and that the health of the impoverished people may be poor in the first place compared to the rich people.
+However, this doesn't take into account the fact that pregnant women and the elderly are more likely to use medical services, and that the health of the impoverished people may be poor in the first place compared to the rich people.
 
 Thus, we also perform regression analysis and inverse-probability weighting, controlling for demographic attributes such as income and age, as well as information related to health care, such as pregnancy, that can be obtained from NHANES.
 
