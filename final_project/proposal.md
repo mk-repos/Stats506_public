@@ -19,7 +19,7 @@ In the NHANES questionnaire survey, we will use the following:
 
 We will link the type of insurance **at the time of the survey** to the frequency of use **during the previous year**. Because the subjects may not have used their current insurance during the previous year, the following data/variable may be used to clean up the data as much as possible.
 
- - Insurance Questionnaire (HIQ_J) of the previous wave.
+ - Insurance Questionnaire (HIQ) of the previous wave.
  - "*Time when no insurance in past year?* (HIQ210)"
 
 # Analysis
