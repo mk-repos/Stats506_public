@@ -200,6 +200,9 @@ See Stata code `./analysis.do`
 
 The resulting table is embedded below. This table will be reformatted in the final report.
 
+We find that people who receive assistance, such as Medicaid, use the hospital more often.
+* category "8" means "use hospitals 16 times or more"
+
 ```{r, echo=FALSE, warning=FALSE}
 tbl = read_csv("./data/stata_tabulate.csv", col_types = cols())
 tbl %>% 
@@ -216,6 +219,10 @@ See Stata code `./analysis.do`
 
 The resulting regression table is embedded below.  This table will be reformatted in the final report.
 
+The two way table above does not eliminate biases like some people (such as older people, poorer people, etc.) are less healthy and more likely to use hospitals in the first place. Therefore, we performed an ordinal logistic regression, where we tried to control for demographic variables.
+
+Again, we find that receiving Medicaid and other benefits had a positive impact on the number of hospital visits.
+
 ```{r, echo=FALSE}
 reg_tbl = read_dta("./data/stata_ologit.dta")
 reg_tbl %>% 
@@ -226,6 +233,8 @@ reg_tbl %>%
 ```
 
 # Ordinal Logistic Regression with Inverse-Probability Weighting
+
+We also analyzed the impact of the treatment (Medicaid receipt) using propensity scores as well. Again, a statistically significant impact was observed.
 
 ```{r}
 # recode indicator variable to 0-1
@@ -274,6 +283,8 @@ summary(ologit)
 ```
 
 # Account for pregnancy
+
+In addition to the elderly and poor, pregnant women should also increase their use of hospitals. Therefore, we limited our analysis to women only and controlled for pregnancy.
 
 Since pregnancies are confirmed by the MEC exam rather than by the NHANES general interview, we can only use observations that took the MEC exam. We only retain observations where the subject is determined to be pregnant or not pregnant on the MEC exam.
 
