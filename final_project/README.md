@@ -10,6 +10,7 @@ This repository contains the scripts created for [Final Project, Statistics 506,
 
 The `.Rmd` code contains a draft of the explanations & descriptions that will be used in the final report. The final report is going to be a two-page document summarizing the contents of this `.Rmd`.
 
+ - `analysis.html` is the rendered .Rmd.
  - `analysis.Rmd` cleans NHANES 2017-2018 data for R/STATA, shows resulting tables from the STATA code below, applies inverse probability weighting
  - `analysis.do` by using the cleaned dataset & survey weights, creates two-way table, applies ordinal logistic regression, output resulting tables in `./data/`
 
