@@ -292,7 +292,7 @@ Since pregnancies are confirmed by the MEC exam rather than by the NHANES genera
 pregnancy = df %>% 
   # drop female subjects with unknown pregnancy status
   filter(exam_status == 2) %>% 
-  # retain men, drop NA
+  # drop men
   filter(!is.na(pregnancy)) %>%
   # drop women with unknown pregnancy status
   filter(pregnancy != 3) %>% 
