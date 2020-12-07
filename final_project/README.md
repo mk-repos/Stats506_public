@@ -8,7 +8,7 @@ This repository contains the scripts created for [Final Project, Statistics 506,
 
 ***Work in progress***
 
-The `.Rmd` code contains a draft of the explanations & descriptions that will be used in the final report. The final report is going to be a two-page document summarizing the contents of this `.Rmd`.
+The `.html` and `.Rmd` contain a draft of the explanations & descriptions that will be used in the final report. The final report is going to be a two-page document summarizing the contents of this `.Rmd`.
 
  - `analysis.html` is the rendered .Rmd.
  - `analysis.Rmd` cleans NHANES 2017-2018 data for R/STATA, shows resulting tables from the STATA code below, applies inverse probability weighting
@@ -16,6 +16,6 @@ The `.Rmd` code contains a draft of the explanations & descriptions that will be
 
 # To-do Lists
 
- - Document the more detailed interpretation of the results of the analysis. 
- - Using NHANES data from the previous wave, extract only those whose insurance status is the same in 2015-2016 and 2017-2018. Repeat all analyses.
+ - Document the more detailed interpretation of the results.
+ - Using NHANES data from the previous wave, extract only those whose insurance status is the same between 2015-2016 and 2017-2018. Repeat all analyses.
  - Consider the interaction of variables, and search for a better model.
