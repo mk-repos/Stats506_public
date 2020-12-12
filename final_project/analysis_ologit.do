@@ -13,6 +13,7 @@
 
 // set up: ------------------------------------------------------------------ *
 version 16.1
+
 log using analysis_ologit.log, text replace
 
 use "./data/cleaned.dta", clear
