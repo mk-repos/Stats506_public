@@ -2,20 +2,21 @@ This repository contains the scripts created for [Final Project, Statistics 506,
 
 # Question of Interest
 
-> Do adults in the U.S. subsidized by Medicaid use health care services more often than those with private insurance?
+> Do adults in the U.S. with Medicaid use hospitals more often than those with private insurance?
 
-# Analysis
+# Files
 
-***Work in progress***
+## Report
+ - `report.Rmd` is the write-up containing all results and descriptions.
+ - `report.html` is the rendered `report.Rmd`
 
-The `.html` and `.Rmd` contain a draft of the explanations & descriptions that will be used in the final report. The final report is going to be a two-page document summarizing the contents of this `.Rmd`.
+## Codes for Analysis
+### Data Cleaning (in R)
+ - `analysis_crean_data.R` cleans data, computes inverse-probability weights, and outputs datasets for analysis.
+### Statistical Analysis (in STATA)
+ - `analysis_ologit.do` creates a two-way table and applies ordinal logistic regression using survey weights.
+ - `analysis_ipw` applies ordinal logistic regression using inverse-probability weights
 
- - `analysis.html` is the rendered .Rmd.
- - `analysis.Rmd` cleans NHANES 2017-2018 data for R/STATA, shows resulting tables from the STATA code below, applies inverse probability weighting
- - `analysis.do` by using the cleaned dataset & survey weights, creates two-way table, applies ordinal logistic regression, output resulting tables in `./data/`
-
-# To-do Lists
-
- - Document the more detailed interpretation of the results.
- - Using NHANES data from the previous wave, extract only those whose insurance status is the same between 2015-2016 and 2017-2018. Repeat all analyses.
- - Consider the interaction of variables, and search for a better model.
+## Data
+ - Original and cleaned datasets are stored in `./data/`
+ - The files whose names start with `result_` are the output of the STATA analysis results.
