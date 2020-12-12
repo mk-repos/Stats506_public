@@ -49,7 +49,7 @@ In (c), we use everything in (b) to predict treatment using ADA boost algorithm,
 
 # Results {.tabset .tabset-pills .tabset-fade}
 
-Table 1 shows the results of (a). People with assistance tend to visit hospitals more often, and the association is significant.
+Table 1 shows the results of (a). We can see those with assistance tend to visit hospitals more often, and the association is significant.
 
 Table 2 shows the regression table of (b). The coefficient indicates that the estimated odds for those with assistance are increased, but it is not significant.
 
