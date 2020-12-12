@@ -1,0 +1,151 @@
+---
+title: "Stats 506, F20, Final Project"
+author: "Moeki Kurita, mkurita@umich.edu"
+date: "`r format.Date(Sys.Date(), '%B %d, %Y')`"
+output:
+  html_document
+---
+
+```{r setup, include=FALSE}
+# 79: -------------------------------------------------------------------------
+knitr::opts_chunk$set(echo = FALSE)
+options(knitr.kable.NA = '')
+library(haven); library(tidyverse); library(xtable); library(kableExtra)
+```
+
+> Do adults in the U.S. with Medicaid use hospitals more often than those with private insurance?
+
+# Introduction
+
+Medicaid is a form of public assistance in which the government pays for insurance premiums and other medical expenses for low-income people. A typical criticism is the suspicion that health care services will be overused. Using data on the type of insurance and frequency of use of hospitals available in NHANES, we analyze whether there is any evidence to support this claim.
+
+We first test the association between hospital usage and assistance (Medicaid and similar assistance). To control for demographic attributes, we performed an ordinal logistic regression. To further examine causal relationship, we finally performed Inverse Probability Weighting (IPW).
+
+# Data
+
+Our analysis uses the following variables of [NHANES 2017-2018](https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2017). The R/STATA codes are stored [here](https://github.com/mk-repos/Stats506_public/tree/master/final_project).
+
+-	Demographic Data: gender (RIAGENDR), age (RIDAGEYR), race (RIDRETH1), education (DMDEDUC2), family income (INDFMIN2), and survey design (SDMVPSU, SDMVSTRA, WTINT2YR)
+- Health Insurance: having insurance (HIQ011), didn’t have insurance in the past 12 months (HIQ210), type of insurance (HIQ031A-I, not mutually exclusive)
+-	Hospital Utilization: health condition (HUQ010), times receive healthcare in the past 12 months (HUQ051)
+
+We create a few variables based on the original.
+
+-	New indicator of two groups: fully private vs receiving at least one assistance (Medicaid, state/government assistance). We refer to those with assistance as a **treatment** group.
+-	Combined categories of family income (Low :=0-24,999, Mid :=25,000-54,999, High :=55,000+)
+-	Indicator of whether the person has graduated from college.
+
+Our analysis focuses on adults (20+ age) with insurance. We exclude cases with military health insurance and/or Medicare (65+ age or disabled), as these cases are not appropriate to evaluating Medicaid. In order to make sure the type of insurance had not changed in the past 12 months, we removed all subjects who had not had insurance at any point during the period.
+
+# Methods
+
+We performed (a) test for association, and (b) ordinal logistic regression with survey weights and (c) with IPW. All estimates are given with 95% confidence intervals using Taylor-linearized variance estimation. We use ordinal logistic because the number of hospital visits here is not evenly categorized (1=one, 8=sixteen or more).
+
+In (a), the percentage (in population) of each category of hospital visits was calculated for those with and without treatment. We test the association using chi-squared test.
+
+In (b), we control for gender, centered age and its squared term, race, indicator of college graduates, 3-cateogry family income, and health condition.
+
+In (c), we use everything in (b) to predict treatment using ADA boost algorithm, but we use the original family income variable and don’t include squared age.
+
+# Results {.tabset .tabset-pills .tabset-fade}
+
+Table 1 shows the results of (a). People with assistance tend to visit hospitals more often, and the association is significant.
+
+Table 2 shows the regression table of (b). The coefficient indicates that the estimated odds for those with assistance are increased, but it is not significant.
+
+For (c), we have strong evidence (p=0.018) that the estimated odds of being in higher category (more visits) for those with assistance are increased by 51.4%, relative to those only with private insurance. The confidence interval ranges from 23.9% to 85%.
+
+```{r read_results, message=FALSE, warning=FALSE}
+tabulate = read_csv("./data/result_tabulate.csv")
+ologit = read_dta("./data/result_ologit.dta")
+```
+
+## Table 1 
+
+```{r column_percentages}
+# caption
+cap = paste0(
+ "*Table 1* Column percentages of hospital visits categories for each group. ",
+ "N=130,063,549. Design based F(5.06, 75.93)=6.0167, P=0.0001***."
+)
+# rename columns
+names(tabulate) = c("Visits", "private", "ci_pri", "subsidized", "ci_sub",
+                    "total", "ci_total")
+# show table
+tabulate %>% 
+  # retain only necesally columns and rows
+  slice(3:11) %>% 
+  # extract confidence bounds as numeric
+  separate(ci_pri, c("lwr_pri", "upr_pri"), sep = ",") %>%
+  separate(ci_sub, c("lwr_sub", "upr_sub"), sep = ",") %>%
+  separate(ci_total, c("lwr_total", "upr_total"), sep = ",") %>% 
+  mutate_if(is.character,as.numeric) %>% 
+  # format confidence intervals nicely
+  transmute(Visits,
+            Private = sprintf(
+                         "<div> %4.2f%% </div> <div>(%4.2f, %4.2f)</div>",
+                         private, lwr_pri, upr_pri),
+            Treatment = sprintf(
+                         "<div> %4.2f%% </div> <div>(%4.2f, %4.2f)</div>",
+                         subsidized, lwr_sub, upr_sub),
+            Total = sprintf(
+                         "<div> %4.2f%% </div> <div>(%4.2f, %4.2f)</div>",
+                         total, lwr_total, upr_total)) %>% 
+  kable(format = 'html', escape = FALSE, align = 'c', caption = cap) %>%
+  kable_paper("hover", full_width = TRUE)
+```
+
+## Table 2
+
+```{r regression_table}
+# caption
+cap = paste0(
+ "*Table 2* Regression table for the ordinal logistic regression with ",
+ "survey weights. N=117,670,620. ****p<0.0001, ***p<0.001, **p<0.05, *p<0.1"
+)
+# function for formatting
+pretty_p = function(p) {
+  # Format a p-value as a nice string
+  # Originally from Week 6 activity of Stats 506 F20 (Henderson, 2020), but
+  # modified by the author. Used in author's solution to Problem Set 3.
+  # Inputs: p - a numeric vector
+  # Output: a string indicating a significance level, e.g. p < 0.01***
+  p = ifelse(p == -1, NA, p)
+  ifelse(p < 0.001, "p < 0.001 ****",
+         ifelse(p < 0.01, "p < 0.01 ***",
+                ifelse(p < 0.05, "p < 0.05 **",
+                       ifelse(p < 0.1, "p < 0.1 *", 
+                              sprintf('p = %05.3f', p)))))
+}
+# Drop unnecessary rows
+ologit = ologit %>% 
+  slice(-1, -5, -7, -12, -14, -19, -(22:29))
+# rename rows
+row_names = c("Treatment", "Centered Age", "(Centered Age)^2",
+              "Female", "Hispanic", "White", "Black", "Other",
+              "College", "2", "3", "4", "5", "Mid", "High")
+# Show table
+tibble(ologit, Variables = row_names) %>% 
+  # select columns, format confidence intervals nicely
+  transmute(Variables,
+            `Odds Ratio` = sprintf(
+                         "<div> %4.2f </div> <div>(%4.2f, %4.2f)</div>",
+                         exp(coef), exp(ci_lower), exp(ci_upper)),
+            `P-value` = pretty_p(pval)) %>% 
+  kable(format = 'html', escape = FALSE, align = 'c') %>%
+  kable_paper("hover", full_width = TRUE) %>% 
+  # group rows
+  pack_rows("Treatment", 1, 1) %>%
+  pack_rows("Age", 2, 3) %>% 
+  pack_rows("Gender", 4, 4) %>% 
+  pack_rows("Race", 5, 8) %>% 
+  pack_rows("Education", 9, 9) %>% 
+  pack_rows("Health Condition", 10, 13) %>% 
+  pack_rows("Family Income", 14, 15)
+```
+
+# {-}
+
+# Conclusion
+
+Using IPW, we found that there is a causal relationship between Medicaid/similar assistance and increase in hospital visits. This conclusion only holds under the assumption of no unobserved confounders. However, it seems reasonable to believe that there are unobserved cofounders. For example, we couldn’t take into account pregnancy status in the past due to the limitation of NHANES’s cross-sectional design.
