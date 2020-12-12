@@ -41,7 +41,6 @@ vignettes/*.pdf
 
 # Original
 *.csv
-*.XPT
 *.gz
 .DS_Store
 **/.DS_Store
