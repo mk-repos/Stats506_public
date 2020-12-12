@@ -13,9 +13,11 @@ options(knitr.kable.NA = '')
 library(haven); library(tidyverse); library(xtable); library(kableExtra)
 ```
 
-> Do adults in the U.S. with Medicaid use hospitals more often than those with private insurance?
+See author's [repository](https://github.com/mk-repos/Stats506_public/tree/master/final_project) for the original files and analysis codes.
 
 # Introduction
+
+> Do adults in the U.S. with Medicaid use hospitals more often than those with private insurance?
 
 Medicaid is a form of public assistance in which the government pays for insurance premiums and other medical expenses for low-income people. A typical criticism is the suspicion that health care services will be overused. Using data on the type of insurance and frequency of use of hospitals available in NHANES, we analyze whether there is any evidence to support this claim.
 
@@ -23,7 +25,7 @@ We first test the association between hospital usage and assistance (Medicaid an
 
 # Data
 
-Our analysis uses the following variables of [NHANES 2017-2018](https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2017). The R/STATA codes are stored [here](https://github.com/mk-repos/Stats506_public/tree/master/final_project).
+Our analysis uses the following variables of [NHANES 2017-2018](https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2017).
 
 -	Demographic Data: gender (RIAGENDR), age (RIDAGEYR), race (RIDRETH1), education (DMDEDUC2), family income (INDFMIN2), and survey design (SDMVPSU, SDMVSTRA, WTINT2YR)
 - Health Insurance: having insurance (HIQ011), didn’t have insurance in the past 12 months (HIQ210), type of insurance (HIQ031A-I, not mutually exclusive)

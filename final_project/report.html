@@ -574,17 +574,18 @@ summary {
 </div>
 
 
+<p>See author’s <a href="https://github.com/mk-repos/Stats506_public/tree/master/final_project">repository</a> for the original files and analysis codes.</p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
 <blockquote>
 <p>Do adults in the U.S. with Medicaid use hospitals more often than those with private insurance?</p>
 </blockquote>
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
 <p>Medicaid is a form of public assistance in which the government pays for insurance premiums and other medical expenses for low-income people. A typical criticism is the suspicion that health care services will be overused. Using data on the type of insurance and frequency of use of hospitals available in NHANES, we analyze whether there is any evidence to support this claim.</p>
 <p>We first test the association between hospital usage and assistance (Medicaid and similar assistance). To control for demographic attributes, we performed an ordinal logistic regression. To further examine causal relationship, we finally performed Inverse Probability Weighting (IPW).</p>
 </div>
 <div id="data" class="section level1">
 <h1>Data</h1>
-<p>Our analysis uses the following variables of <a href="https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2017">NHANES 2017-2018</a>. The R/STATA codes are stored <a href="https://github.com/mk-repos/Stats506_public/tree/master/final_project">here</a>.</p>
+<p>Our analysis uses the following variables of <a href="https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2017">NHANES 2017-2018</a>.</p>
 <ul>
 <li>Demographic Data: gender (RIAGENDR), age (RIDAGEYR), race (RIDRETH1), education (DMDEDUC2), family income (INDFMIN2), and survey design (SDMVPSU, SDMVSTRA, WTINT2YR)</li>
 <li>Health Insurance: having insurance (HIQ011), didn’t have insurance in the past 12 months (HIQ210), type of insurance (HIQ031A-I, not mutually exclusive)</li>
