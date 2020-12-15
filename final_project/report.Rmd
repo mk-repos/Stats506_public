@@ -103,7 +103,7 @@ tabulate %>%
 # caption
 cap = paste0(
  "*Table 2* Regression table for the ordinal logistic regression with ",
- "survey weights. N=117,670,620. ****p<0.0001, ***p<0.001, **p<0.05, *p<0.1"
+ "survey weights. N=117,670,620.**** p<0.0001, *** p<0.001, ** p<0.05, * p<0.1"
 )
 # function for formatting
 pretty_p = function(p) {
@@ -134,7 +134,7 @@ tibble(ologit, Variables = row_names) %>%
                          "<div> %4.2f </div> <div>(%4.2f, %4.2f)</div>",
                          exp(coef), exp(ci_lower), exp(ci_upper)),
             `P-value` = pretty_p(pval)) %>% 
-  kable(format = 'html', escape = FALSE, align = 'c') %>%
+  kable(format = 'html', escape = FALSE, align = 'c', caption = cap) %>%
   kable_paper("hover", full_width = TRUE) %>% 
   # group rows
   pack_rows("Treatment", 1, 1) %>%
